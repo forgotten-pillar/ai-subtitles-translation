@@ -1,4 +1,9 @@
 language: "Croatian"
 translation_mapping:
   "the personality of God": "ličnost Boga"
+  "trinitarian": "trinitarijanski"
+  "nontrinitarian": "netrinitarijanski"
+  "creed": "kredo"
+  "fundamental principles": "fundamentalni principi"
+  "foundational principles": "temeljni principi"
 bible_verse_translation: "Varaždinska Biblija HBN"
