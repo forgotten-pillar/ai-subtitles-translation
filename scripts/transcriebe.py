@@ -2,6 +2,7 @@ import sys
 import os
 from dotenv import load_dotenv
 import assemblyai as aai
+import re
 
 # Load enviroment variables from .env file
 load_dotenv()
@@ -49,7 +50,7 @@ def main():
     # Determine the root directory (parent of the 'scripts' folder)
     script_dir = os.path.dirname(os.path.abspath(__file__))
     root_dir = os.path.abspath(os.path.join(script_dir, ".."))
-    
+
     media_name = os.path.basename(media_file)
     #without extension
     media_name = os.path.splitext(media_name)[0]
