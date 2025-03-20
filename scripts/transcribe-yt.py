@@ -153,7 +153,7 @@ def main():
     
     print(f"File path: {file_path}")
 
-    output_srt_file = os.path.join(output_dir, f"{file_name}.srt")
+    output_srt_file = os.path.join(output_dir, f"{file_name}_{lang.upper()}.srt")
 
     if os.path.exists(output_srt_file):
         print(f"Output file {output_srt_file} already exists")
