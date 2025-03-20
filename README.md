@@ -13,6 +13,11 @@ The tool is designed to create multilingual subtitles for content while maintain
 
 ## Requirements
 
+### Prerequisites
+
+- **FFmpeg**: Required for audio processing
+- Python 3.6+
+
 ### API Keys
 
 You'll need to obtain the following API keys:
@@ -59,10 +64,10 @@ You'll need to obtain the following API keys:
    ```bash
    # For Ubuntu/Debian
    sudo apt update
-   sudo apt install python3 python3-pip
+   sudo apt install python3 python3-pip ffmpeg
    
    # For MacOS using Homebrew
-   brew install python3
+   brew install python3 ffmpeg
    ```
 
 2. Install required packages:
@@ -79,7 +84,16 @@ You'll need to obtain the following API keys:
 
 1. Install Python 3.6+ from [python.org](https://www.python.org/downloads/windows/)
 
-2. Install required packages:
+2. Install FFmpeg:
+   - Download from [ffmpeg.org](https://ffmpeg.org/download.html) or use a package manager like Chocolatey
+   - Add FFmpeg to your system PATH
+
+   With Chocolatey:
+   ```cmd
+   choco install ffmpeg
+   ```
+
+3. Install required packages:
    ```cmd
    pip install yt-dlp python-dotenv assemblyai anthropic pyyaml
    ```
@@ -97,6 +111,20 @@ translation_mapping:
   # Add more specific terms that need consistent translation
 ```
 
+### Config File Parameters Explained
+
+- **language**: The name of the target language written in English (e.g., "Spanish", "French", "German")
+
+- **bible_verse_translation**: Specifies which Bible translation to use when translating biblical content.
+  - If the specified translation exists in the target language, and it is known to AI, the AI will use it directly
+  - If the translation doesn't exist, the AI will translate the text from the original source language
+  - Example: "Reina-Valera 1960" for Spanish, "Luther Bibel 2017" for German
+
+- **translation_mapping**: A dictionary of specific phrases and their enforced translations
+  - This ensures consistency in how certain key terms are translated throughout the content
+  - The AI will always use these specified translations when encountering the defined source phrases
+  - Particularly useful for specialized terminology, proper nouns, or conceptual terms with specific translations in the target language
+
 Example for Spanish (`lang/es/config.yaml`):
 ```yaml
 language: "Spanish"
@@ -105,11 +133,19 @@ translation_mapping:
   "Kingdom of God": "Reino de Dios"
   "Holy Spirit": "Espíritu Santo"
   "Christ Jesus": "Cristo Jesús"
+  "faith": "fe"
+  "grace": "gracia"
 ```
 
-* language - written in English
-* bible_verse_translation - this will tell AI which bible translation will use if encountered with the Bible text. If the Bible translation is known, it will use it, otherwise it will translate as from the original source language
-* translation_mapping - certain phrases can be generaly defined. If you want to enforce these phrases, define it in the config, AI will keep use these phrases and expression within the translation
+Example for German (`lang/de/config.yaml`):
+```yaml
+language: "German"
+bible_verse_translation: "Luther Bibel 2017"
+translation_mapping:
+  "Kingdom of God": "Reich Gottes"
+  "Holy Spirit": "Heiliger Geist"
+  "gospel": "Evangelium"
+```
 
 ## Usage
 
