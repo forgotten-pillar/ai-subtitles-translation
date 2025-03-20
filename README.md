@@ -11,18 +11,25 @@ This script performs three main functions:
 
 The tool is designed to create multilingual subtitles for content while maintaining proper formatting and handling special content like Bible verses.
 
-## Requirements
+## Getting Started
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/forgotten-pillar/ai-subtitles-translation.git
+cd ai-subtitles-translation
+```
+
+### API Keys
+
+You'll need to obtain the following API keys:
+- **AssemblyAI API Key**: Sign up and get your key at [assemblyai.com](https://www.assemblyai.com/)
+- **Anthropic Claude API Key**: Sign up and get your key at [console.anthropic.com](https://console.anthropic.com/)
 
 ### Prerequisites
 
 - **FFmpeg**: Required for audio processing
 - Python 3.6+
-
-### API Keys
-
-You'll need to obtain the following API keys:
-- **AssemblyAI API Key**: For audio transcription
-- **Anthropic Claude API Key**: For translation services
 
 ### Dependencies
 
@@ -36,31 +43,60 @@ You'll need to obtain the following API keys:
 
 ## Setup Instructions
 
-### For All Platforms
+### Setting Up Python Virtual Environment
 
-1. Clone the repository or download the script
+#### For Linux/Mac
+```bash
+# Create a virtual environment
+python3 -m venv venv
 
-2. Create a `.env` file in the same directory as the script with your API keys:
-   ```
-   ASSEMBLY_AI_API_KEY=your_assemblyai_key_here
-   CLAUDE_API_KEY=your_claude_key_here
-   ```
+# Activate the virtual environment
+source venv/bin/activate
 
-3. Create the following directory structure:
-   ```
-   ├── scripts/
-   │   └── translate-yt.py
-   ├── content/     (downloaded audio files will be stored here)
-   ├── lang/
-   │   ├── en/      (English transcriptions)
-   │   └── [target_lang]/  (translated files + config)
-   │       └── config.yaml
-   └── .env         (API keys)
-   ```
+# Install dependencies
+pip install yt-dlp python-dotenv assemblyai anthropic pyyaml
+```
 
-### Linux/Mac Setup
+#### For Windows
+```cmd
+# Create a virtual environment
+python -m venv venv
 
-1. Install Python 3.6 or higher:
+# Activate the virtual environment
+venv\Scripts\activate
+
+# Install dependencies
+pip install yt-dlp python-dotenv assemblyai anthropic pyyaml
+```
+
+### Environment Configuration
+
+Create a `.env` file in the root directory with your API keys:
+```
+ASSEMBLY_AI_API_KEY=your_assemblyai_key_here
+CLAUDE_API_KEY=your_claude_key_here
+```
+
+### Directory Structure
+
+Ensure your project has the following directory structure:
+```
+├── scripts/
+│   └── translate-yt.py
+├── content/     (downloaded audio files will be stored here)
+├── lang/
+│   ├── en/      (English transcriptions)
+│   └── [target_lang]/  (translated files + config)
+│       └── config.yaml
+├── venv/        (virtual environment)
+└── .env         (API keys)
+```
+
+### Platform-Specific Setup
+
+#### Linux/Mac Setup
+
+1. Install FFmpeg and Python 3.6+:
    ```bash
    # For Ubuntu/Debian
    sudo apt update
@@ -70,17 +106,12 @@ You'll need to obtain the following API keys:
    brew install python3 ffmpeg
    ```
 
-2. Install required packages:
-   ```bash
-   pip3 install yt-dlp python-dotenv assemblyai anthropic pyyaml
-   ```
-
-3. Make the script executable:
+2. Make the script executable:
    ```bash
    chmod +x scripts/translate-yt.py
    ```
 
-### Windows Setup
+#### Windows Setup
 
 1. Install Python 3.6+ from [python.org](https://www.python.org/downloads/windows/)
 
@@ -91,11 +122,6 @@ You'll need to obtain the following API keys:
    With Chocolatey:
    ```cmd
    choco install ffmpeg
-   ```
-
-3. Install required packages:
-   ```cmd
-   pip install yt-dlp python-dotenv assemblyai anthropic pyyaml
    ```
 
 ## Translation Configuration
@@ -116,7 +142,7 @@ translation_mapping:
 - **language**: The name of the target language written in English (e.g., "Spanish", "French", "German")
 
 - **bible_verse_translation**: Specifies which Bible translation to use when translating biblical content.
-  - If the specified translation exists in the target language, and it is known to AI, the AI will use it directly
+  - If the specified translation exists in the target language, the AI will use it directly
   - If the translation doesn't exist, the AI will translate the text from the original source language
   - Example: "Reina-Valera 1960" for Spanish, "Luther Bibel 2017" for German
 
@@ -149,6 +175,17 @@ translation_mapping:
 
 ## Usage
 
+Remember to activate your virtual environment before running the script:
+
+```bash
+# Linux/Mac
+source venv/bin/activate
+
+# Windows
+venv\Scripts\activate
+```
+
+Then run the script:
 ```bash
 python scripts/translate-yt.py <youtube-url> <target-language-code>
 ```
