@@ -265,21 +265,21 @@ def main():
     
     print(f"File path: {media_file}")
 
-    source_lang_srt_file = os.path.join(output_target_lang_dir, f"{media_name}.srt")
+    source_lang_srt_file = os.path.join(output_source_lang_dir, f"{media_name}.srt")
 
     if os.path.exists(source_lang_srt_file):
         print(f"Output file {source_lang_srt_file} already exists")
-        return 1
+        print("Skipping transcription...")
+    else:
+        # Transcribe the audio file
+        source_srt_content = transcribe(media_file)
 
-    # Transcribe the audio file
-    source_srt_content = transcribe(media_file)
-
-    with open(source_lang_srt_file, 'w', encoding='utf-8') as file:
-        file.write(source_srt_content)
+        with open(source_lang_srt_file, 'w', encoding='utf-8') as file:
+            file.write(source_srt_content)
     
-    print(f"Transcription saved to: {source_lang_srt_file}")
+        print(f"Transcription saved to: {source_lang_srt_file}")
     
-    normalize_line_breaks(source_lang_srt_file)
+        normalize_line_breaks(source_lang_srt_file)
 
     # load translation configuration
     translation_config = os.path.join(root_dir, "lang", target_lang, "config.yaml")
