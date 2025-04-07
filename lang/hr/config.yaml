@@ -8,3 +8,6 @@ translation_mapping:
   "foundational principles": "temeljni principi"
   "Calvary": "Golgota"
 bible_verse_translation: "Varaždinska Biblija HBN"
+speaker_gender: "male"
+additional_settings:
+  - "Please ignore filler words if they are not necessary for the meaning of the sentence"

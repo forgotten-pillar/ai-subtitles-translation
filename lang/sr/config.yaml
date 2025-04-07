@@ -2,3 +2,10 @@ language: "Serbian"
 translation_mapping:
   "the personality of God": "ličnost Boga"
 bible_verse_translation: "Daničić-Karađić"
+speaker_gender: "female"
+additional_settings:
+  - "When translating direct speech from English to Serbian, adapt the quotation style to follow Serbian conventions. Specifically, replace the American-style comma before direct speech with a colon and enclose the speech in quotation marks. For example: ‘Rekla sam, treba da ostaneš duže i onda…’ → ‘Rekla sam: “Treba da ostaneš duže.” I onda…’. Or, ‘Rekla mi je, moram da idem na dijalizu.’ → ‘Rekla mi je: “Moram da idem na dijalizu.”’ Ensure consistency in all instances of direct speech throughout the translation."
+  - "Please ignore filler words if they are not necessary for the meaning of the sentence"
+  - "Ignore the first word of a new sentence if it is 'So', 'And', or 'Now'. These words should be omitted from the translation unless they are essential for meaning or tone."
+  - "Always translate the English pronoun 'you' using the singular form 'ti', never the plural 'vi'. Ensure that all accompanying verbs, pronouns, and possessive forms match this singular usage correctly in case and agreement."
+  - "Whenever translating to 'jer', always place a comma before it. The sentence structure should follow the format: 'Otišla sam, jer sam imala sastanak.' That is, insert a comma and a space before 'jer', regardless of the clause structure."

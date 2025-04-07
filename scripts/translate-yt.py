@@ -66,19 +66,38 @@ def create_systerm_prompot(translation_config):
         mapping_text = "\n".join(mapping_lines)
 
     mapping_rule = f"""
-    2. **Translation Mapping:**
+    - **Translation Mapping:**
         - For the following words or phrases, use the provided translations:
         {mapping_text}
     """ if len(mapping_lines) > 0 else ""
+
+    speaker_gender = get_config_value(translation_config, "speaker_gender")
+    gender_clause = ""
+    if speaker_gender:
+        gender_clause = f"""
+    - **Voice**
+        - The speaker is {speaker_gender}. Translate accordingly.
+        """
+
+    additional_settings = get_config_value(translation_config, "additional_settings")
+    if additional_settings and isinstance(additional_settings, list) and len(additional_settings) > 0:
+        additional_clause = f"""
+        - **Additional Settings:**
+            - {"\n            - ".join(additional_settings)}
+        """
 
     return f"""
     You are SRT title translator. Translate to {language} language. Output only SRT format.
 
     Key rules to follow:
-    1. **Bible verse Translations:**
+    - **Bible verse Translations:**
         - For every Bible verse encountered, use "{bible_verse_translation}" Bible translation.
     
     {mapping_rule}
+
+    {gender_clause}
+
+    {additional_clause}
 
     Follow these instructions carefully to ensure that the translation is accurate and free of any extraneous commentary.
     """
